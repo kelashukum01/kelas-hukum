@@ -1,0 +1,16 @@
+{
+  "name": "Kelas Hukum Online",
+  "short_name": "KelasHukum",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#203864",
+  "description": "Menampilkan artikel hukum terbaru dari Blogspot Kelas Hukum Online",
+  "icons": [
+    {
+      "src": "https://kelashukumonline.blogspot.com/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}
