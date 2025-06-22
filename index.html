@@ -3,52 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Kelas Hukum Online</title>
+  <title>KELAS HUKUM ONLINE</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="manifest" href="manifest.json" />
 </head>
 <body>
   <header>
-    <h1>Kelas Hukum Online</h1>
-    <p>Materi Hukum dari Blogspot</p>
+    <h1>KELAS HUKUM ONLINE</h1>
+    <p>Materi Hukum dari Blogspot <a href="https://kelashukumonline.blogspot.com" target="_blank">kelashukumonline.blogspot.com</a></p>
   </header>
 
-  <!-- MENU NAVIGASI -->
+  <!-- Navigasi Label -->
   <nav class="navbar">
     <ul>
-      <li><a href="#materi hukum perdata">Materi Hukum Perdata</a></li>
-      <li><a href="#materi hukum pidana">Materi Hukum Pidana</a></li>
-      <li><a href="#materi hukum internasional">Materi Hukum Internasional</a></li>
-      <li><a href="#materi hukum tata negara">Materi Hukum Tata Negara</a></li>
+      <li><a href="#" class="menu" data-kategori="semua">Semua</a></li>
+      <li><a href="#" class="menu" data-kategori="materi hukum perdata">Hukum Perdata</a></li>
+      <li><a href="#" class="menu" data-kategori="materi hukum pidana">Hukum Pidana</a></li>
+      <li><a href="#" class="menu" data-kategori="materi hukum internasional">Hukum Internasional</a></li>
+      <li><a href="#" class="menu" data-kategori="materi hukum tata negara">Hukum Tata Negara</a></li>
     </ul>
   </nav>
 
-  <!-- FITUR PENCARIAN -->
+  <!-- Pencarian -->
   <div class="search-container">
     <input type="text" id="searchInput" placeholder="Cari materi hukum...">
   </div>
 
-  <!-- KONTEN UTAMA -->
+  <!-- Konten Artikel -->
   <main>
-    <section id="materi hukum perdata">
-      <h2>Materi Hukum Perdata</h2>
-      <div id="materi hukum perdata-content"></div>
-    </section>
-
-    <section id="materi hukum pidana">
-      <h2>Materi Hukum Pidana</h2>
-      <div id="materi hukum pidana-content"></div>
-    </section>
-
-    <section id="materi hukum internasional">
-      <h2>Materi Hukum Internasional</h2>
-      <div id="materi hukum internasional-content"></div>
-    </section>
-
-    <section id="materi hukum tata negara">
-      <h2>Materi Hukum Tata Negara</h2>
-      <div id="materi hukum tata negara-content"></div>
-    </section>
+    <div id="artikel-container"></div>
   </main>
 
   <footer>

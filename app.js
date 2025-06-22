@@ -1,40 +1,25 @@
+let semuaArtikel = [];
+
 fetch('https://api.rss2json.com/v1/api.json?rss_url=https://kelashukumonline.blogspot.com/feeds/posts/default?alt=rss')
   .then(response => response.json())
   .then(data => {
-    data.items.forEach(item => {
-      const title = item.title;
-      const link = item.link;
-      const date = new Date(item.pubDate).toLocaleDateString("id-ID");
-      const description = item.description.replace(/<[^>]*>?/gm, '').substring(0, 150) + "...";
-      const categories = item.categories.map(c => c.toLowerCase());
+    semuaArtikel = data.items;
+    tampilkanArtikel("semua");
 
-      const articleHTML = `
-        <article class="post">
-          <h3><a href="${link}" target="_blank">${title}</a></h3>
-          <p class="date">Dipublikasikan: ${date}</p>
-          <p>${description}</p>
-        </article>
-      `;
-
-      if (categories.includes("materi hukum perdata")) {
-        document.getElementById("materi hukum perdata-content").innerHTML += articleHTML;
-      }
-      if (categories.includes("materi hukum pidana")) {
-        document.getElementById("materi hukum pidana-content").innerHTML += articleHTML;
-      }
-      if (categories.includes("materi hukum internasional")) {
-        document.getElementById("materi hukum internasional-content").innerHTML += articleHTML;
-      }
-      if (categories.includes("materi hukum tata negara")) {
-        document.getElementById("materi hukum tata negara-content").innerHTML += articleHTML;
-      }
+    // Filter berdasarkan kategori
+    document.querySelectorAll(".menu").forEach(menu => {
+      menu.addEventListener("click", function (e) {
+        e.preventDefault();
+        const kategori = this.getAttribute("data-kategori");
+        tampilkanArtikel(kategori);
+      });
     });
 
-    // Fungsi pencarian
+    // Fitur pencarian
     document.getElementById("searchInput").addEventListener("input", function () {
       const keyword = this.value.toLowerCase();
-      const posts = document.querySelectorAll(".post");
-      posts.forEach(post => {
+      const artikelDitampilkan = document.querySelectorAll(".post");
+      artikelDitampilkan.forEach(post => {
         const title = post.querySelector("h3").textContent.toLowerCase();
         if (title.includes(keyword)) {
           post.style.display = "";
@@ -43,8 +28,35 @@ fetch('https://api.rss2json.com/v1/api.json?rss_url=https://kelashukumonline.blo
         }
       });
     });
-  })
-  .catch(error => {
-    document.querySelector("main").innerHTML = `<p>Gagal memuat artikel. Silakan coba lagi nanti.</p>`;
-    console.error("Gagal fetch RSS:", error);
   });
+
+function tampilkanArtikel(kategori) {
+  const container = document.getElementById("artikel-container");
+  container.innerHTML = "";
+
+  const hasil = semuaArtikel.filter(item => {
+    const labels = item.categories.map(c => c.toLowerCase());
+    return kategori === "semua" || labels.includes(kategori.toLowerCase());
+  });
+
+  if (hasil.length === 0) {
+    container.innerHTML = "<p>Tidak ada artikel untuk kategori ini.</p>";
+    return;
+  }
+
+  hasil.forEach(item => {
+    const title = item.title;
+    const link = item.link;
+    const date = new Date(item.pubDate).toLocaleDateString("id-ID");
+    const description = item.description.replace(/<[^>]*>?/gm, '').substring(0, 150) + "...";
+
+    const html = `
+      <article class="post">
+        <h3><a href="${link}" target="_blank">${title}</a></h3>
+        <p class="date">Dipublikasikan: ${date}</p>
+        <p>${description}</p>
+      </article>
+    `;
+    container.innerHTML += html;
+  });
+}
