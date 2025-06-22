@@ -1,9 +1,9 @@
 // Daftar label dan ID kontainernya
 const kategoriFeeds = {
-  "materi hukum perdata": "perdata-content",
-  "materi hukum pidana": "pidana-content",
-  "materi hukum internasional": "internasional-content",
-  "materi hukum tata negara": "tatnegara-content"
+  "materi hukum perdata": "materi hukum perdata-content",
+  "materi hukum pidana": "materi hukum pidana-content",
+  "materi hukum internasional": "materi hukum internasional-content",
+  "materi hukum tata negara": "materi hukum tata negara-content"
 };
 
 // Ambil artikel dari tiap label dan tampilkan
