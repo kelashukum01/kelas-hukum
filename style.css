@@ -1,10 +1,9 @@
+/* Umum */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  background-color: #f9f9f9;
+  background-color: #f4f4f4;
   color: #333;
-  font-size: 16px;
-  line-height: 1.6;
 }
 
 header {
@@ -15,84 +14,105 @@ header {
 }
 
 header h1 {
-  font-size: 2rem;
-  margin: 0;
-  text-transform: uppercase;
+  font-size: 1.8em;
   letter-spacing: 1px;
+  margin: 0.2em 0;
+  text-transform: uppercase;
 }
 
 header p {
-  font-size: 0.95rem;
-  margin-top: 0.5em;
+  font-size: 1em;
+  margin: 0.5em 0;
 }
 
-header a {
-  color: #fff;
+/* ✅ Warna link di header diperjelas */
+header p a {
+  color: #FFD700; /* Emas terang */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+header p a:hover {
   text-decoration: underline;
+  color: #FFEB3B; /* Kuning terang saat hover */
 }
 
 /* Navigasi */
 .navbar {
   background-color: #203864;
+  padding: 0.5em;
   text-align: center;
 }
 
 .navbar ul {
   list-style: none;
-  padding: 0.5em;
+  padding: 0;
   margin: 0;
 }
 
 .navbar li {
   display: inline-block;
-  margin: 0 0.75em;
+  margin: 0 1em;
 }
 
 .navbar a {
   color: #fff;
   text-decoration: none;
-  font-weight: 600;
-  font-size: 0.95rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
 }
 
 .navbar a:hover {
   text-decoration: underline;
+  color: #ffdb4d;
 }
 
 /* Pencarian */
 .search-container {
   text-align: center;
-  margin: 1.2em 0;
+  margin: 1em 0;
 }
 
 #searchInput {
-  padding: 0.6em;
+  padding: 0.5em;
   width: 80%;
-  max-width: 420px;
+  max-width: 400px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  font-size: 1rem;
+  font-size: 1em;
 }
 
-/* Artikel */
+/* Konten */
 main {
-  max-width: 960px;
+  max-width: 1000px;
   margin: auto;
-  padding: 1.2em;
+  padding: 1em;
+}
+
+section {
+  margin: 2em 0;
+}
+
+section h2 {
+  border-bottom: 2px solid #203864;
+  padding-bottom: 0.3em;
+  margin-bottom: 1em;
+  font-size: 1.4em;
+  text-transform: uppercase;
 }
 
 .post {
   background: #fff;
+  margin-bottom: 1em;
   padding: 1em;
-  margin-bottom: 1.2em;
-  border-left: 4px solid #203864;
+  border-left: 5px solid #203864;
   border-radius: 5px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  box-shadow: 0 0 5px rgba(0,0,0,0.05);
 }
 
 .post h3 {
-  margin: 0;
-  font-size: 1.2rem;
+  margin-top: 0;
+  font-size: 1.2em;
 }
 
 .post a {
@@ -105,35 +125,38 @@ main {
 }
 
 .date {
-  font-size: 0.85rem;
-  color: #666;
-  margin-bottom: 0.5em;
+  font-size: 0.85em;
+  color: gray;
 }
 
 /* Footer */
 footer {
   text-align: center;
   padding: 1em;
-  font-size: 0.9rem;
   background-color: #eee;
+  font-size: 0.9em;
 }
 
-/* Responsif */
+/* Responsif Mobile */
 @media (max-width: 600px) {
-  header h1 {
-    font-size: 1.5rem;
-  }
-
   .navbar li {
     display: block;
     margin: 0.5em 0;
   }
 
   #searchInput {
-    width: 90%;
+    width: 95%;
+  }
+
+  header h1 {
+    font-size: 1.4em;
+  }
+
+  section h2 {
+    font-size: 1.1em;
   }
 
   .post h3 {
-    font-size: 1rem;
+    font-size: 1em;
   }
 }
