@@ -1,8 +1,8 @@
 const kategoriList = [
-  { id: "hukumperdata", label: "materi hukum perdata" },
-  { id: "hukumpidana", label: "materi hukum pidana" },
-  { id: "hukuminternasional", label: "materi hukum internasional" },
-  { id: "hukumtatanegara", label: "materi hukum tata negara" } // id tanpa spasi!
+  { id: "perdata", label: "materi hukum perdata" },
+  { id: "pidana", label: "materi hukum pidana" },
+  { id: "internasional", label: "materi hukum internasional" },
+  { id: "tatnegara", label: "materi hukum tata negara" } // id tanpa spasi!
 ];
 
 kategoriList.forEach(({ id, label }) => {
