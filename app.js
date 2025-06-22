@@ -1,13 +1,13 @@
 const kategoriList = [
-  { id: "perdata", label: "materi hukum perdata" },
-  { id: "pidana", label: "materi hukum pidana" },
-  { id: "internasional", label: "materi hukum internasional" },
-  { id: "tatnegara", label: "materi hukum tata negara" }
+  { id: "hukumperdata", label: "materi hukum perdata" },
+  { id: "hukumpidana", label: "materi hukum pidana" },
+  { id: "hukuminternasional", label: "materi hukum internasional" },
+  { id: "hukumtatanegara", label: "materi hukum tata negara" } // id tanpa spasi!
 ];
 
 kategoriList.forEach(({ id, label }) => {
-  const rssURL = `https://kelashukumonline.blogspot.com/feeds/posts/default/-/${encodeURIComponent(label)}?alt=rss`;
-  const apiURL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssURL)}`;
+  const rssFeed = `https://kelashukumonline.blogspot.com/feeds/posts/default/-/${encodeURIComponent(label)}?alt=rss`;
+  const apiURL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssFeed)}`;
 
   fetch(apiURL)
     .then(response => {
@@ -38,15 +38,16 @@ kategoriList.forEach(({ id, label }) => {
       });
     })
     .catch(error => {
-      document.getElementById(`${id}-content`).innerHTML = `<p>Gagal memuat artikel materi hukum ${label}</p>`;
-      console.error("Gagal memuat kategori", label, error);
+      document.getElementById(`${id}-content`).innerHTML = `<p>Gagal memuat artikel untuk kategori ${label}.</p>`;
+      console.error("Gagal memuat:", label, error);
     });
 });
 
-// Fitur pencarian
+// 🔍 Fitur Pencarian Global
 document.getElementById("searchInput").addEventListener("input", function () {
   const keyword = this.value.toLowerCase();
   const posts = document.querySelectorAll(".post");
+
   posts.forEach(post => {
     const title = post.querySelector("h3").textContent.toLowerCase();
     post.style.display = title.includes(keyword) ? "" : "none";
