@@ -17,16 +17,16 @@ fetch('https://api.rss2json.com/v1/api.json?rss_url=https://kelashukumonline.blo
       `;
 
       if (categories.includes("materi hukum perdata")) {
-        document.getElementById("perdata-content").innerHTML += articleHTML;
+        document.getElementById("materi hukum perdata-content").innerHTML += articleHTML;
       }
       if (categories.includes("materi hukum pidana")) {
-        document.getElementById("pidana-content").innerHTML += articleHTML;
+        document.getElementById("materi hukum pidana-content").innerHTML += articleHTML;
       }
       if (categories.includes("materi hukum internasional")) {
-        document.getElementById("internasional-content").innerHTML += articleHTML;
+        document.getElementById("materi hukum internasional-content").innerHTML += articleHTML;
       }
       if (categories.includes("materi hukum tata negara")) {
-        document.getElementById("tatnegara-content").innerHTML += articleHTML;
+        document.getElementById("materi hukum tata negara-content").innerHTML += articleHTML;
       }
     });
 
