@@ -2,9 +2,10 @@ const kategoriList = [
   { id: "perdata", label: "materi hukum perdata" },
   { id: "pidana", label: "materi hukum pidana" },
   { id: "internasional", label: "materi hukum internasional" },
-  { id: "tatnegara", label: "materi hukum tata negara" } // id tanpa spasi!
+  { id: "tatnegara", label: "materi hukum tata negara" }
 ];
 
+// Fetch dan tampilkan artikel per kategori
 kategoriList.forEach(({ id, label }) => {
   const rssFeed = `https://kelashukumonline.blogspot.com/feeds/posts/default/-/${encodeURIComponent(label)}?alt=rss`;
   const apiURL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssFeed)}`;
@@ -15,8 +16,9 @@ kategoriList.forEach(({ id, label }) => {
       return response.json();
     })
     .then(data => {
+      const container = document.getElementById(`${id}-content`);
       if (!data.items || data.items.length === 0) {
-        document.getElementById(`${id}-content`).innerHTML = `<p>Belum ada artikel pada kategori ini.</p>`;
+        container.innerHTML = `<p>Belum ada artikel pada kategori ini.</p>`;
         return;
       }
 
@@ -33,8 +35,7 @@ kategoriList.forEach(({ id, label }) => {
             <p>${description}</p>
           </article>
         `;
-
-        document.getElementById(`${id}-content`).innerHTML += articleHTML;
+        container.innerHTML += articleHTML;
       });
     })
     .catch(error => {
@@ -43,7 +44,7 @@ kategoriList.forEach(({ id, label }) => {
     });
 });
 
-// 🔍 Fitur Pencarian Global
+// 🔍 Fitur Pencarian
 document.getElementById("searchInput").addEventListener("input", function () {
   const keyword = this.value.toLowerCase();
   const posts = document.querySelectorAll(".post");
@@ -51,5 +52,28 @@ document.getElementById("searchInput").addEventListener("input", function () {
   posts.forEach(post => {
     const title = post.querySelector("h3").textContent.toLowerCase();
     post.style.display = title.includes(keyword) ? "" : "none";
+  });
+});
+
+// 📂 Filter berdasarkan klik menu kategori
+document.querySelectorAll(".menu").forEach(link => {
+  link.addEventListener("click", function (e) {
+    e.preventDefault();
+    const kategori = this.dataset.kategori.toLowerCase();
+    const targetId = this.dataset.target || "";
+
+    // Sembunyikan semua section
+    kategoriList.forEach(({ id }) => {
+      const section = document.getElementById(id);
+      if (section) section.style.display = "none";
+    });
+
+    // Tampilkan hanya section yang dipilih
+    const tampil = kategoriList.find(k => k.label === kategori);
+    if (tampil) {
+      const sectionToShow = document.getElementById(tampil.id);
+      if (sectionToShow) sectionToShow.style.display = "block";
+      sectionToShow.scrollIntoView({ behavior: "smooth" });
+    }
   });
 });
