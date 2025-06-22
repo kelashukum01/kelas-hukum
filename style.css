@@ -1,3 +1,4 @@
+/* Umum */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -12,16 +13,75 @@ header {
   text-align: center;
 }
 
-main {
-  max-width: 800px;
-  margin: 2em auto;
-  padding: 1em;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+/* Navigasi */
+.navbar {
+  background-color: #203864;
+  padding: 0.5em;
+  text-align: center;
 }
 
-.post h2 {
+.navbar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar li {
+  display: inline-block;
+  margin: 0 1em;
+}
+
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+/* Pencarian */
+.search-container {
+  text-align: center;
+  margin: 1em 0;
+}
+
+#searchInput {
+  padding: 0.5em;
+  width: 80%;
+  max-width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Konten */
+main {
+  max-width: 1000px;
+  margin: auto;
+  padding: 1em;
+}
+
+section {
+  margin: 2em 0;
+}
+
+section h2 {
+  border-bottom: 2px solid #203864;
+  padding-bottom: 0.3em;
+  margin-bottom: 1em;
+}
+
+.post {
+  background: #fff;
+  margin-bottom: 1em;
+  padding: 1em;
+  border-left: 5px solid #203864;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.05);
+}
+
+.post h3 {
   margin-top: 0;
 }
 
@@ -39,9 +99,22 @@ main {
   color: gray;
 }
 
+/* Footer */
 footer {
   text-align: center;
   padding: 1em;
   background-color: #eee;
   font-size: 0.9em;
+}
+
+/* Responsif Mobile */
+@media (max-width: 600px) {
+  .navbar li {
+    display: block;
+    margin: 0.5em 0;
+  }
+
+  #searchInput {
+    width: 95%;
+  }
 }
