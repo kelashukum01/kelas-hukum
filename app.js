@@ -1,19 +1,25 @@
-// Daftar label dan ID kontainernya
-const kategoriFeeds = {
-  "materi hukum perdata": "materi hukum perdata-content",
-  "materi hukum pidana": "materi hukum pidana-content",
-  "materi hukum internasional": "materi hukum internasional-content",
-  "materi hukum tata negara": "materi hukum tata negara-content"
-};
+const kategoriList = [
+  { id: "perdata", label: "materi hukum perdata" },
+  { id: "pidana", label: "materi hukum pidana" },
+  { id: "internasional", label: "materi hukum internasional" },
+  { id: "tatnegara", label: "materi hukum tata negara" }
+];
 
-// Ambil artikel dari tiap label dan tampilkan
-Object.entries(kategoriFeeds).forEach(([label, containerId]) => {
-  const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=https://kelashukumonline.blogspot.com/feeds/posts/default/-/${encodeURIComponent(label)}?alt=rss`;
+kategoriList.forEach(({ id, label }) => {
+  const rssURL = `https://kelashukumonline.blogspot.com/feeds/posts/default/-/${encodeURIComponent(label)}?alt=rss`;
+  const apiURL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssURL)}`;
 
-  fetch(rssUrl)
-    .then(response => response.json())
+  fetch(apiURL)
+    .then(response => {
+      if (!response.ok) throw new Error("Gagal fetch kategori " + label);
+      return response.json();
+    })
     .then(data => {
-      const container = document.getElementById(containerId);
+      if (!data.items || data.items.length === 0) {
+        document.getElementById(`${id}-content`).innerHTML = `<p>Belum ada artikel pada kategori ini.</p>`;
+        return;
+      }
+
       data.items.forEach(item => {
         const title = item.title;
         const link = item.link;
@@ -28,16 +34,16 @@ Object.entries(kategoriFeeds).forEach(([label, containerId]) => {
           </article>
         `;
 
-        container.innerHTML += articleHTML;
+        document.getElementById(`${id}-content`).innerHTML += articleHTML;
       });
     })
     .catch(error => {
-      document.getElementById(containerId).innerHTML = `<p>Gagal memuat artikel ${label}</p>`;
-      console.error(`Gagal memuat kategori ${label}:`, error);
+      document.getElementById(`${id}-content`).innerHTML = `<p>Gagal memuat artikel materi hukum ${label}</p>`;
+      console.error("Gagal memuat kategori", label, error);
     });
 });
 
-// Fungsi pencarian
+// Fitur pencarian
 document.getElementById("searchInput").addEventListener("input", function () {
   const keyword = this.value.toLowerCase();
   const posts = document.querySelectorAll(".post");
